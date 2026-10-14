@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Builds the MADS CLI release zip from the private madsv5 repo and points the
+# Builds the MADS CLI release zip from the private madsv5/mads-cli repo and points the
 # Homebrew formula and the Scoop manifest at it.
 #
-#   scripts/release.sh [--publish] [MADSV5_REPO] [REF]
+#   scripts/release.sh [--publish] [MADS_CLI_REPO] [REF]
 #
 # Without --publish it only builds dist/mads-<version>.zip and rewrites
 # Formula/mads.rb and bucket/mads.json. With --publish it also commits, tags,
@@ -13,7 +13,7 @@ PUBLISH=0
 if [[ "${1:-}" == "--publish" ]]; then PUBLISH=1; shift; fi
 
 TAP_DIR="$(cd "$(dirname "$0")/.." && pwd -P)"
-SRC="${1:-$TAP_DIR/../mads-cli/madsv5}"
+SRC="${1:-$TAP_DIR/../mads-cli}"
 REF="${2:-HEAD}"
 REPO_SLUG="sivicomeng/homebrew-mads"
 
