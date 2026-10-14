@@ -3,6 +3,11 @@
 Paquetes de instalación de la herramienta de línea de comandos MADS V5.
 Requiere un JDK 8 o superior.
 
+> **¿Ya tienes `mads` instalado con `git clone`?** Quítalo antes, o seguirá
+> ejecutándose en lugar del nuevo: en macOS/Linux `sudo rm /usr/local/bin/mads`
+> (o quita su `bin` del `PATH`); en Windows quita `...\git\madsv5\bin` de la
+> variable `Path`. Después borra la carpeta clonada.
+
 ## macOS / Linux (Homebrew)
 
 ```bash
