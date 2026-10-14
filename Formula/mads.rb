@@ -3,7 +3,7 @@
 class Mads < Formula
   desc "MADS V5 Command Line Tool for building modular applications"
   homepage "https://mads.sivicom.cat/"
-  url "https://github.com/sivicom/homebrew-mads/releases/download/v5.1.0-b20261006/mads-5.1.0-b20261006.zip"
+  url "https://github.com/sivicomeng/homebrew-mads/releases/download/v5.1.0-b20261006/mads-5.1.0-b20261006.zip"
   version "5.1.0-b20261006"
   sha256 "2b40e4c4aa21bbf664787eb7c29341db6e73bdbbfb28c7e248056360b427f12c"
   license "BSD-3-Clause"

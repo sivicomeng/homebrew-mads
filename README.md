@@ -6,7 +6,7 @@ Requiere un JDK 8 o superior.
 ## macOS / Linux (Homebrew)
 
 ```bash
-brew tap sivicom/mads
+brew tap sivicomeng/mads
 brew install mads
 mads --version
 ```
@@ -18,7 +18,7 @@ Actualizar: `brew upgrade mads`
 ```powershell
 scoop bucket add java                       # solo si no tienes un JDK
 scoop install java/temurin-lts-jdk          # solo si no tienes un JDK
-scoop bucket add mads https://github.com/sivicom/homebrew-mads
+scoop bucket add mads https://github.com/sivicomeng/homebrew-mads
 scoop install mads/mads
 mads --version
 ```

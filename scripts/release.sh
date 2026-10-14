@@ -15,7 +15,7 @@ if [[ "${1:-}" == "--publish" ]]; then PUBLISH=1; shift; fi
 TAP_DIR="$(cd "$(dirname "$0")/.." && pwd -P)"
 SRC="${1:-$TAP_DIR/../mads-cli/madsv5}"
 REF="${2:-HEAD}"
-REPO_SLUG="sivicom/homebrew-mads"
+REPO_SLUG="sivicomeng/homebrew-mads"
 
 # version.txt is rewritten every time the tool runs, so always read it from git.
 VERSION="$(git -C "$SRC" show "$REF:bin/internal/version.txt" \
