@@ -1,0 +1,28 @@
+{
+    "version": "5.1.0-b20261006",
+    "description": "MADS V5 Command Line Tool for building modular applications",
+    "homepage": "https://mads.sivicom.cat/",
+    "license": "BSD-3-Clause",
+    "url": "https://github.com/sivicom/homebrew-mads/releases/download/v5.1.0-b20261006/mads-5.1.0-b20261006.zip",
+    "hash": "2b40e4c4aa21bbf664787eb7c29341db6e73bdbbfb28c7e248056360b427f12c",
+    "extract_dir": "mads-5.1.0-b20261006",
+    "bin": "bin\\mads.bat",
+    "suggest": {
+        "JDK": [
+            "java/temurin-lts-jdk"
+        ]
+    },
+    "notes": [
+        "MADS V5 requires a Java JDK (8 or later). If you do not have one:",
+        "  scoop bucket add java",
+        "  scoop install java/temurin-lts-jdk",
+        "Verify the installation with: mads --version"
+    ],
+    "checkver": {
+        "github": "https://github.com/sivicom/homebrew-mads"
+    },
+    "autoupdate": {
+        "url": "https://github.com/sivicom/homebrew-mads/releases/download/v$version/mads-$version.zip",
+        "extract_dir": "mads-$version"
+    }
+}
