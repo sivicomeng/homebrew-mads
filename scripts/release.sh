@@ -6,7 +6,9 @@
 #
 # Without --publish it only builds dist/mads-<version>.zip and rewrites
 # Formula/mads.rb and bucket/mads.json. With --publish it also commits, tags,
-# pushes this repo and uploads the zip as a GitHub release (needs `gh auth login`).
+# pushes this repo and creates the GitHub release with the zip and version.txt,
+# which `mads` reads to detect new versions (needs `gh auth login`). The release
+# notes are the CHANGELOG.md section of the version.
 set -euo pipefail
 
 PUBLISH=0
@@ -17,16 +19,24 @@ SRC="${1:-$TAP_DIR/../mads-cli}"
 REF="${2:-HEAD}"
 REPO_SLUG="sivicomeng/homebrew-mads"
 
-# version.txt is rewritten every time the tool runs, so always read it from git.
-VERSION="$(git -C "$SRC" show "$REF:bin/internal/version.txt" \
-  | sed -n 's/^version=//p' | tr '_' '-')"
+# Always read from git, never from the working tree.
+VERSION_TXT="$(git -C "$SRC" show "$REF:bin/internal/version.txt")"
+VERSION="$(sed -n 's/^version=//p' <<<"$VERSION_TXT" | tr -d '\r' | tr '_' '-')"
 [[ -n "$VERSION" ]] || { echo "No version= in $REF:bin/internal/version.txt" >&2; exit 1; }
 
 TAG="v$VERSION"
 ZIP="$TAP_DIR/dist/mads-$VERSION.zip"
 URL="https://github.com/$REPO_SLUG/releases/download/$TAG/mads-$VERSION.zip"
 
+if (( PUBLISH )) && [[ -n "$(git -C "$TAP_DIR" ls-remote --tags origin "refs/tags/$TAG")" ]]; then
+  echo "$TAG is already released" >&2; exit 1
+fi
+
 mkdir -p "$TAP_DIR/dist"
+printf 'version=%s\n' "$(tr '-' '_' <<<"$VERSION")" > "$TAP_DIR/dist/version.txt"
+git -C "$SRC" show "$REF:CHANGELOG.md" \
+  | awk -v h="## $VERSION" '$0 == h {on = 1; next} on && /^## / {exit} on' > "$TAP_DIR/dist/notes.md"
+[[ -s "$TAP_DIR/dist/notes.md" ]] || echo "MADS V5 CLI $VERSION" > "$TAP_DIR/dist/notes.md"
 git -C "$SRC" archive --format=zip --prefix="mads-$VERSION/" -o "$ZIP" "$REF" \
   bin LICENSE README.md CHANGELOG.md AUTHORS
 SHA="$(shasum -a 256 "$ZIP" | cut -d' ' -f1)"
@@ -56,6 +66,6 @@ if (( PUBLISH )); then
   git -C "$TAP_DIR" diff --cached --quiet || git -C "$TAP_DIR" commit -m "mads $VERSION"
   git -C "$TAP_DIR" tag -a "$TAG" -m "MADS $VERSION"
   git -C "$TAP_DIR" push origin HEAD "$TAG"
-  gh release create "$TAG" "$ZIP" --repo "$REPO_SLUG" --title "MADS $VERSION" \
-    --notes "MADS V5 CLI $VERSION"
+  gh release create "$TAG" "$ZIP" "$TAP_DIR/dist/version.txt" --repo "$REPO_SLUG" \
+    --title "MADS $VERSION" --notes-file "$TAP_DIR/dist/notes.md" --latest
 fi
