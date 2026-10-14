@@ -21,6 +21,7 @@ Actualizar: `brew upgrade mads`
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 irm get.scoop.sh | iex
 
+scoop install git                           # Scoop necesita Git para añadir buckets
 scoop bucket add java                       # solo si no tienes un JDK
 scoop install java/temurin-lts-jdk          # solo si no tienes un JDK
 scoop bucket add mads https://github.com/sivicomeng/homebrew-mads
