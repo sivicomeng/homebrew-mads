@@ -7,6 +7,7 @@ Requiere un JDK 8 o superior.
 
 ```bash
 brew tap sivicomeng/mads
+brew trust --formula sivicomeng/mads/mads   # Homebrew solo carga fórmulas de taps de terceros de confianza
 brew install mads
 mads --version
 ```
