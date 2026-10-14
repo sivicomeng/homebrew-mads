@@ -3,9 +3,9 @@
 class Mads < Formula
   desc "Command-line tool for building modular MADS V5 applications"
   homepage "https://mads.sivicom.cat/"
-  url "https://github.com/sivicomeng/homebrew-mads/releases/download/v5.1.0-b20261006/mads-5.1.0-b20261006.zip"
-  version "5.1.0-b20261006"
-  sha256 "2b40e4c4aa21bbf664787eb7c29341db6e73bdbbfb28c7e248056360b427f12c"
+  url "https://github.com/sivicomeng/homebrew-mads/releases/download/v5.1.0-b20261014/mads-5.1.0-b20261014.zip"
+  version "5.1.0-b20261014"
+  sha256 "c19c8dc1392b78c55afdde21d0b1b5b70608f8c45a3ca2968b05e67305292996"
   license "BSD-3-Clause"
 
   # The jars target Java 8 bytecode, so any current JDK runs them.
