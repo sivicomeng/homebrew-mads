@@ -17,6 +17,10 @@ Actualizar: `brew upgrade mads`
 ## Windows (Scoop)
 
 ```powershell
+# Solo si no tienes Scoop (desde una PowerShell normal, no como administrador):
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+irm get.scoop.sh | iex
+
 scoop bucket add java                       # solo si no tienes un JDK
 scoop install java/temurin-lts-jdk          # solo si no tienes un JDK
 scoop bucket add mads https://github.com/sivicomeng/homebrew-mads
