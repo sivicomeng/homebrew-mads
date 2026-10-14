@@ -53,7 +53,7 @@ echo "sha256:  $SHA"
 
 if (( PUBLISH )); then
   git -C "$TAP_DIR" add Formula/mads.rb bucket/mads.json
-  git -C "$TAP_DIR" commit -m "mads $VERSION"
+  git -C "$TAP_DIR" diff --cached --quiet || git -C "$TAP_DIR" commit -m "mads $VERSION"
   git -C "$TAP_DIR" tag -a "$TAG" -m "MADS $VERSION"
   git -C "$TAP_DIR" push origin HEAD "$TAG"
   gh release create "$TAG" "$ZIP" --repo "$REPO_SLUG" --title "MADS $VERSION" \
