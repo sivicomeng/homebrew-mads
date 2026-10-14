@@ -27,13 +27,8 @@ Actualizar: `scoop update mads`
 
 ## Publicar una versión nueva
 
-Desde este repo, con el repo privado `madsv5/mads-cli` clonado en `../mads-cli`
-y `gh auth login` hecho:
-
-```bash
-scripts/release.sh             # genera dist/mads-<versión>.zip y actualiza fórmula y manifiesto
-scripts/release.sh --publish   # además hace commit, tag, push y sube el zip como GitHub Release
-```
-
-La versión se lee de `bin/internal/version.txt` del commit indicado
-(`scripts/release.sh [--publish] [RUTA_MADS_CLI] [REF]`).
+Se hace desde el repo privado `madsv5-platform` con `mads-tool/scripts/deploy.sh`,
+que compila la herramienta, la sube a `madsv5/mads-cli` y llama a
+`scripts/release.sh --publish` de este repo. Ese script genera el zip desde git,
+actualiza la fórmula y el manifiesto, y crea la release con el zip, `version.txt`
+(que `mads` consulta para avisar de versiones nuevas) y las notas del CHANGELOG.
