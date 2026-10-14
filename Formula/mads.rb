@@ -1,7 +1,7 @@
 # MADS V5 CLI Tool Homebrew Formula
 # url/version/sha256 are updated by scripts/release.sh — do not edit by hand.
 class Mads < Formula
-  desc "MADS V5 Command Line Tool for building modular applications"
+  desc "Command-line tool for building modular MADS V5 applications"
   homepage "https://mads.sivicom.cat/"
   url "https://github.com/sivicomeng/homebrew-mads/releases/download/v5.1.0-b20261006/mads-5.1.0-b20261006.zip"
   version "5.1.0-b20261006"
@@ -14,10 +14,12 @@ class Mads < Formula
   def install
     libexec.install "bin"
     (bin/"mads").write_env_script libexec/"bin/mads",
-      JAVA_HOME_MADS: Formula["openjdk"].opt_prefix
+      JAVA_HOME_MADS: formula_opt_prefix("openjdk")
   end
 
   test do
+    # MADS fails to start when user.home does not exist; brew points it at a missing dir.
+    ENV["_JAVA_OPTIONS"] = "-Duser.home=#{testpath}"
     assert_match "MADS V5 tool version", shell_output("#{bin}/mads --version")
   end
 end
