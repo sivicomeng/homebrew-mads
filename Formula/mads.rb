@@ -18,8 +18,11 @@ class Mads < Formula
   end
 
   test do
-    # MADS fails to start when user.home does not exist; brew points it at a missing dir.
+    # mads rewrites bin/internal/version.txt on every run, and fails if user.home does
+    # not exist; the test sandbox forbids the former and breaks the latter.
+    cp_r libexec/"bin", testpath
+    ENV["JAVA_HOME_MADS"] = formula_opt_prefix("openjdk")
     ENV["_JAVA_OPTIONS"] = "-Duser.home=#{testpath}"
-    assert_match "MADS V5 tool version", shell_output("#{bin}/mads --version")
+    assert_match "MADS V5 tool version", shell_output("#{testpath}/bin/mads --version")
   end
 end
