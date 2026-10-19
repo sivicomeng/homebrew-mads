@@ -1,11 +1,11 @@
 {
-    "version": "5.1.0-b20261014",
+    "version": "5.1.0-b20261019",
     "description": "MADS V5 Command Line Tool for building modular applications",
     "homepage": "https://mads.sivicom.cat/",
     "license": "BSD-3-Clause",
-    "url": "https://github.com/sivicomeng/homebrew-mads/releases/download/v5.1.0-b20261014/mads-5.1.0-b20261014.zip",
-    "hash": "c19c8dc1392b78c55afdde21d0b1b5b70608f8c45a3ca2968b05e67305292996",
-    "extract_dir": "mads-5.1.0-b20261014",
+    "url": "https://github.com/sivicomeng/homebrew-mads/releases/download/v5.1.0-b20261019/mads-5.1.0-b20261019.zip",
+    "hash": "bfd50027566cc85a46f036fe5d0f2ee3c54d1c6e581e013a4f92cb63249560ba",
+    "extract_dir": "mads-5.1.0-b20261019",
     "bin": "bin\\mads.bat",
     "suggest": {
         "JDK": [
